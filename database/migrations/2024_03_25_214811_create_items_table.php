@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('item_name');
             $table->text('description');
+            $table->integer('comments');
             $table->string('image_url')->nullable();
             $table->unsignedBigInteger('owner_id');
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');

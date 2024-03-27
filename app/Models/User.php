@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -55,7 +56,8 @@ class User extends Authenticatable
         parent::boot();
 
         static::creating(function ($user) {
-            $user->uuid = Uuid::uuid4()->toString();
+            // $user->uuid = Uuid::uuid4()->toString();
+            $user->uuid = Str::orderedUuid();
         });
     }
 }
