@@ -31,17 +31,17 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'username' => ['required', 'string', 'lowercase', 'max:255', 'unique:'.User::class],
-            'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'username' => ['required', 'string', 'lowercase', 'max:255', 'unique:' . User::class],
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
-        $profilePicturePath = $request->file('profile_picture')->store('profile_pictures');
+        $profilePicturePath = $request->file('profile_picture') ? $request->file('profile_picture')->store('profile_pictures') : null;
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'username' => $request->username,
             'password' => Hash::make($request->password),
             'profile_picture' => $profilePicturePath
         ]);

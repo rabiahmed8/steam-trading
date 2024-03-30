@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,6 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::post('/submit-form',[PostController::class, 'store'])->name('create-post');
+
+    Route::get('profile-picture', [PostController::class, 'showProfilePicture'])->name('profile.picture');
 });
 
 require __DIR__.'/auth.php';
