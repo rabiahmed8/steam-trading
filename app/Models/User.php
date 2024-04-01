@@ -22,6 +22,11 @@ class User extends Authenticatable
     protected $primaryKey = 'id';
     public $incrementing = false;
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'user_id');
+    }
+
     protected $fillable = [
         'name',
         'email',
@@ -55,6 +60,7 @@ class User extends Authenticatable
     protected static function boot()
     {
         parent::boot();
+
 
         static::creating(function ($user) {
             // $user->uuid = Uuid::uuid4()->toString();

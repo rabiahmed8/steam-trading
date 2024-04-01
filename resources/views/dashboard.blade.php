@@ -25,7 +25,13 @@
                     class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline">Submit</button>
             </form>
             @foreach ($posts as $post)
-                <div class="mt-5 overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                <div class="flex items-center pl-5 mt-5 overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                    @if ($post->user->profile_picture)
+                        <img class="w-10 h-10 rounded-full" src="{{ asset('storage/' . $post->user->profile_picture) }}"
+                            alt="Profile Picture">
+                    @else
+                        <img class="w-10 h-10 rounded-full" src="https://picsum.photos/200" alt="Profile Picture">
+                    @endif
                     <div class="p-6 text-gray-900">
                         [H] {{ $post->selling }} [W] {{ $post->buying }}
                     </div>

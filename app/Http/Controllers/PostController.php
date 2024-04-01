@@ -27,9 +27,10 @@ class PostController extends Controller
 
     public function find()
     {
-        $posts = Post::all();
-        Log::info("kuch bhi");
+        // $posts = Post::all();
+        // Log::info("kuch bhi");
         // $skins = Skin::all();
+        $posts = Post::with('user')->latest()->get();
         return view('dashboard', compact('posts'));
     }
 }

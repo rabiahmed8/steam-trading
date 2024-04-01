@@ -61,10 +61,11 @@ class ProfileController extends Controller
             // $profilePicturePath = $request->file('profile_picture')->store('public/profile_pictures');
             $profilePicturePath = request()->file('profile_picture')->store('profile_pictures', 'public');
             // $request->file->move(public_path('profile_picture'), $request->user()->profile_picture);
-            // error_log($profilePicturePath);
+            // error_log($request->user()->profile_picture);
+
 
             if ($request->user()->profile_picture) {
-                Storage::delete($request->user()->profile_picture);
+                Storage::delete('public/' . $request->user()->profile_picture);
             }
 
             $request->user()->profile_picture = $profilePicturePath;
